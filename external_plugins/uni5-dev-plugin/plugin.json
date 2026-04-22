@@ -1,0 +1,12 @@
+﻿{
+  "name": "uni5-dev-plugin",
+  "source": {
+    "source": "github",
+    "repo": "toujaninoura/uni5-dev-plugin"
+  },
+  "version": "1.0.0",
+  "description": "Autonomous development agent — transforms a spec into delivered, tested code on GitHub. C# .NET 8, Angular 17, Fullstack, TDD, SOLID, JWT, SQL Server.",
+  "homepage": "https://github.com/toujaninoura/uni5-dev-plugin",
+  "category": "development",
+  "keywords": ["agent", "automation", "dotnet", "angular", "fullstack", "tdd"]
+}
