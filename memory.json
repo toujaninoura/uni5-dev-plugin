@@ -1,0 +1,89 @@
+{
+  "project": {
+    "name": "ProductsApi",
+    "stack": "ASP.NET Core 8 / EF Core SqlServer / NUnit / N-Tier / JWT",
+    "repo_url": "https://github.com/toujaninoura/ProductsApi",
+    "owner": "toujaninoura",
+    "last_sprint": 2,
+    "initialized_at": "2026-04-21"
+  },
+  "preferences": {
+    "commit_style": "conventional",
+    "pr_strategy": "squash",
+    "branch_naming": "feat/issue-{N}-{slug}",
+    "max_parallel_worktrees": 3,
+    "test_framework": "NUnit",
+    "language": "C#"
+  },
+  "answers": {
+    "project_name": "ProductsApi",
+    "stack": "ASP.NET Core 8 / EF Core SqlServer / JWT / NUnit / N-Tier",
+    "database": "SQL Server local",
+    "auth": "JWT avec refresh token",
+    "roles": "Admin (CRUD), User (lecture seule)",
+    "github": "repo existant toujaninoura/ProductsApi"
+  },
+  "sprint": {
+    "current": 2,
+    "status": "DONE",
+    "velocity": 7,
+    "backlog_version": 2,
+    "closed_issues": [13, 14, 15, 16, 17, 18, 19],
+    "tag": "sprint-2-done",
+    "dependency_graph": {
+      "F1": [],
+      "F2": ["F1"],
+      "F3": ["F2"],
+      "F4": ["F3"],
+      "F5": ["F3"],
+      "F6": ["F3", "F5"],
+      "F7": ["F4", "F5", "F6"]
+    }
+  },
+  "instincts": [
+    "Pour les apps vanilla JS sans backend, les features CRUD sont souvent indissociables — les regrouper dans un seul commit est plus cohérent que de les fragmenter artificiellement.",
+    "Éviter les backticks dans les --comment gh issue car ils sont interprétés par bash.",
+    "Pour les packages NuGet .NET, toujours épingler la version majeure (ex: --version '8.*') pour éviter la résolution vers des versions incompatibles.",
+    "Guid.NewGuid() dans un lambda DbContext est évalué à chaque instanciation — toujours capturer le nom de DB dans une variable extérieure au lambda.",
+    "UseHttpsRedirection dans WebApplicationFactory provoque des erreurs 'Failed to determine the https port' — le retirer pour les projets InMemory/test.",
+    "Pour les tests d'intégration ASP.NET Core avec records C#, System.Text.Json sans PropertyNameCaseInsensitive=true ne désérialise pas les propriétés camelCase → toujours utiliser un JsonSerializerOptions avec cette option.",
+    "SQL Server avec EF Core : toujours HasPrecision(18,2) sur les décimaux, HasMaxLength() sur tous les strings, index sur FK.",
+    "JWT avec IdentityUser : AddIdentity avant AddAuthentication, UseAuthentication avant UseAuthorization dans le pipeline.",
+    "AutoMapper v12 est requis pour les tests unitaires avec MapperConfiguration(cfg => ...) — v16+ change l'API complètement. Épingler AutoMapper à '12.*' dans Application et Tests.",
+    "AuthService qui utilise UserManager<User> et AppDbContext doit être en Infrastructure, pas Application — UserManager est un service Identity infrastructure.",
+    "Tests intégration avec Identity InMemory : appeler db.Database.EnsureCreated() + créer les rôles via RoleManager dans SetUp, sinon 'Role USER does not exist'.",
+    "ValidationException ambiguïté entre FluentValidation.ValidationException et Domain.Exceptions.ValidationException — toujours utiliser un alias : using DomainValidationException = ProductsApi.Domain.Exceptions.ValidationException."
+  ],
+  "decisions": [
+    {
+      "date": "2026-04-20",
+      "decision": "Issues #2, #3, #4 fermées sans PR séparés car implémentées dans #1 (architecture monolithique vanilla JS).",
+      "reason": "Les features add/complete/delete/persist partagent le même état tasks[] et ne peuvent pas être isolées proprement sans sur-ingénierie."
+    },
+    {
+      "date": "2026-04-20",
+      "decision": "UseHttpsRedirection retiré de Program.cs dans ProductsApi.",
+      "reason": "API InMemory/dev : la redirection HTTPS n'est pas nécessaire et casse les tests d'intégration WebApplicationFactory."
+    },
+    {
+      "date": "2026-04-20",
+      "decision": "Tests → API reference ajoutée dans ProductsApi.Tests pour accéder à Program dans WebApplicationFactory<Program>.",
+      "reason": "L'architecture N-Tier exige que Tests référence API uniquement pour les tests d'intégration contrôleur."
+    },
+    {
+      "date": "2026-04-21",
+      "decision": "Migration vers SQL Server pour le sprint 2, abandon de InMemory.",
+      "reason": "Exigence utilisateur : SQL Server local avec seed data persistante, refresh token en base."
+    },
+    {
+      "date": "2026-04-22",
+      "decision": "Issues #16 (Auth), #17 (Categories), #18 (Products), #19 (Tests) fermées sans PR séparés, toutes implémentées dans #15 (PR #22).",
+      "reason": "Ces 4 features sont implémentées dans un seul worktree feat/issue-15-infrastructure car Infrastructure, Auth, Controllers et Tests sont fortement couplés et ne peuvent pas être développés sans les autres."
+    },
+    {
+      "date": "2026-04-22",
+      "decision": "AutoMapper downgrade de 16.1.1 à 12.* dans Application et Tests.",
+      "reason": "AutoMapper 16 a supprimé new MapperConfiguration(cfg => ...) utilisé dans les tests unitaires — v12 est la dernière version supportant ce pattern."
+    }
+  ]
+}
