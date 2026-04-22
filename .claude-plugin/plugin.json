@@ -1,0 +1,10 @@
+{
+  "name": "uni5-dev-plugin",
+  "version": "1.0.0",
+  "description": "Transforme un CDC en code livré sur GitHub",
+  "author": "toujaninoura",
+  "agents": ".claude/agents",
+  "skills": ".claude/skills",
+  "hooks": ".claude/hooks.json",
+  "entrypoint": "CLAUDE.md"
+}

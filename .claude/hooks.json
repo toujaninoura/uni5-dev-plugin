@@ -1,0 +1,18 @@
+{
+  "hooks": [
+    {
+      "event": "PreToolUse",
+      "tool": "bash",
+      "script": "if echo \"$TOOL_INPUT\" | grep -q '\\-\\-no-verify'; then echo 'BLOCKED: --no-verify interdit'; exit 1; fi"
+    },
+    {
+      "event": "PreToolUse",
+      "tool": "bash",
+      "script": "if echo \"$TOOL_INPUT\" | grep -qE '(password|secret|api_key)\\s*=\\s*[^$]'; then echo 'BLOCKED: secret détecté'; exit 1; fi"
+    },
+    {
+      "event": "Stop",
+      "script": "echo 'Sprint terminé — penser à mettre à jour memory.json'"
+    }
+  ]
+}
