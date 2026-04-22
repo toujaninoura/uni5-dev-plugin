@@ -128,3 +128,36 @@ docs(scope): description      ← documentation
 TOUJOURS créer dans ~/projects/{nom}
 JAMAIS dans /tmp
 Après génération → copier vers /mnt/c/Users/toujani/Desktop/
+
+## Détection Fullstack Angular + .NET
+
+Si le CDC mentionne : Angular, frontend, interface, UI, tableau de bord,
+formulaire, page, SPA → ET une API .NET détectée :
+
+### Charger en plus :
+- rules/angular.md
+- skills/angular-scaffold.md
+- skills/angular-api.md
+
+### Séquence de développement Fullstack :
+1. db-agent      → entités + migrations
+2. api-agent     → endpoints .NET
+3. dev-agent     → implémentation .NET complète
+4. qa-agent      → validation API
+5. angular-agent → frontend Angular
+6. qa-agent      → validation E2E
+
+### Ordre des issues GitHub :
+- Issues "Domain" + "Application"  → parallèle
+- Issues "Infrastructure"          → après Domain
+- Issues "API"                     → après Infrastructure
+- Issues "Frontend"                → après toutes les issues API
+
+### Configuration CORS automatique
+Toujours ajouter la config CORS dans Program.cs
+pour autoriser http://localhost:4200
+
+### Dossier projet Fullstack
+~/projects/{ProjectName}/
+├── API .NET (5 projets)
+└── {ProjectName}-frontend/ (Angular)
