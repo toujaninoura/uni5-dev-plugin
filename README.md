@@ -1,59 +1,44 @@
-# uni5-dev-plugin
+﻿# uni5-dev-plugin
 
-Plugin Claude Code qui transforme un cahier des charges en code livré sur GitHub.
+> Autonomous development agent for Claude Code — transforms a spec into delivered, tested code on GitHub.
 
-## Installation en 1 commande
+## What it does
 
-```bash
-curl -fsSL https://raw.githubusercontent.com/toujaninoura/uni5-dev-plugin/main/install.sh | bash
-source ~/.bashrc
-```
+Paste a spec → the agent automatically:
+- Creates GitHub issues + board
+- Develops each feature in an isolated Git worktree
+- Writes tests first (TDD)
+- Creates PRs, merges, cleans up
+- Runs QA validation
+- Saves learnings to memory
 
-## Prérequis
-- Claude Code (`claude --version`)
-- GitHub CLI (`gh auth status`)
-- Git configuré (`git config --global user.email`)
+## Supported stacks
 
-## Utilisation
+| Stack | Details |
+|---|---|
+| C# .NET 8 | ASP.NET Core + EF Core + SQL Server + JWT + NUnit |
+| Angular 17 | Standalone components + CSS custom + Jasmine |
+| Fullstack | .NET API + Angular frontend |
 
-```bash
-uni5
-```
+## Install
+Or manually (Windows):
+## Requirements
+- Claude Code (Pro or Max)
+- GitHub CLI (gh auth login)
+- .NET 8 SDK
+- Node.js 18+ + Angular CLI
 
-Puis colle ton CDC dans le prompt `>`.
+## Agents
 
-## Ce que le plugin fait automatiquement
+| Agent | Role |
+|---|---|
+| po-agent | Orchestrator |
+| dev-agent | Developer (8-phase TDD) |
+| api-agent | REST API specialist |
+| angular-agent | Angular 17 specialist |
+| db-agent | Database + migrations |
+| code-reviewer | Quality audit |
+| qa-agent | Final validation |
 
-1. Analyse le CDC et détecte le type de projet
-2. Pose les questions manquantes
-3. Crée les issues GitHub + board
-4. Initialise le repo avec protection de branche
-5. Développe chaque issue dans un worktree isolé
-6. Crée une PR par issue avec revue automatique
-7. Merge + cleanup + tests QA
-8. Archive les apprentissages en mémoire
-
-## Agents inclus
-
-| Agent          | Rôle                        |
-|----------------|-----------------------------|
-| po-agent       | Orchestrateur               |
-| dev-agent      | Développeur (8 phases TDD)  |
-| api-agent      | Spécialiste API REST        |
-| frontend-agent | Spécialiste Frontend        |
-| db-agent       | Spécialiste base de données |
-| code-reviewer  | Audit qualité               |
-| qa-agent       | Tests et validation         |
-
-## Stacks supportés
-
-- C# .NET 8 — API REST + JWT + SQL Server + NUnit
-- Node.js — Express + MongoDB + Jest
-- React/Vue — Frontend SPA
-- Fullstack — Détection automatique
-
-## Mise à jour
-
-```bash
-cd ~/uni5-dev-plugin && git pull
-```
+## License
+MIT © toujaninoura

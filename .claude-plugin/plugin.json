@@ -1,10 +1,22 @@
-{
+﻿{
   "name": "uni5-dev-plugin",
   "version": "1.0.0",
-  "description": "Transforme un CDC en code livré sur GitHub",
-  "author": "toujaninoura",
-  "agents": ".claude/agents",
-  "skills": ".claude/skills",
-  "hooks": ".claude/hooks.json",
-  "entrypoint": "CLAUDE.md"
+  "description": "Autonomous development agent — transforms a spec into delivered, tested code on GitHub. Supports C# .NET 8, Angular 17, Fullstack, N-Tier, SOLID, JWT, SQL Server.",
+  "author": {
+    "name": "toujaninoura",
+    "email": "toujani.noura@gmail.com",
+    "url": "https://github.com/toujaninoura"
+  },
+  "homepage": "https://github.com/toujaninoura/uni5-dev-plugin",
+  "repository": "https://github.com/toujaninoura/uni5-dev-plugin",
+  "license": "MIT",
+  "category": "development",
+  "keywords": [
+    "agent", "automation", "dotnet", "csharp",
+    "angular", "fullstack", "github", "tdd",
+    "solid", "jwt", "sqlserver"
+  ],
+  "claude_code": {
+    "min_version": "1.0.0"
+  }
 }
